@@ -1,5 +1,5 @@
 {
-  "name": "goit-react-hw-06-phonebook",
+  "name": "goit-react-hw-07-phonebook",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -17,6 +17,7 @@
     "react-scripts": "3.4.3",
     "react-transition-group": "^4.4.1",
     "redux": "^4.0.5",
+    "redux-logger": "^3.0.6",
     "redux-persist": "^6.0.0",
     "uuid": "^8.3.0"
   },

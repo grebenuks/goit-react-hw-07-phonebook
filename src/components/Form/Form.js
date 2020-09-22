@@ -3,9 +3,10 @@ import { v4 as uuidv4 } from 'uuid';
 import PropTypes from 'prop-types';
 import styles from './form.module.css';
 import { connect } from 'react-redux';
-import { getFormValue, setNotify } from '../../redux/actions';
+import { setNotify } from '../../redux/actions';
+import { getFormValue, getContact } from '../../redux/operations';
 
-function Form({ getFormValue, items, setNotify }) {
+function Form({ getFormValue, items, setNotify, getContact }) {
   const [state, setState] = useState({ name: '', number: '' });
 
   const handleNameChange = ({ target: { name, value } }) => {
@@ -28,11 +29,14 @@ function Form({ getFormValue, items, setNotify }) {
       items.map(el => (el.name === input[0].value ? (flag = false) : ''));
 
       flag
-        ? getFormValue({
-            name: input[0].value,
-            number: input[1].value,
-            id: uuidv4(),
-          })
+        ? getFormValue(
+            {
+              name: input[0].value,
+              number: input[1].value,
+              id: uuidv4(),
+            },
+            // getContact(),
+          )
         : notifyTrue();
     }
     form.reset();
@@ -72,5 +76,5 @@ Form.propTypes = {
 };
 
 const mapStateToProps = state => ({ items: state.contacts.items });
-const mapDispatchToProps = { getFormValue, setNotify };
+const mapDispatchToProps = { getFormValue, setNotify, getContact };
 export default connect(mapStateToProps, mapDispatchToProps)(Form);

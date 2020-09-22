@@ -1,7 +1,8 @@
 import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
+import logger from 'redux-logger';
 import {
-  persistStore,
-  persistReducer,
+  // persistStore,
+  // persistReducer,
   FLUSH,
   REHYDRATE,
   PAUSE,
@@ -9,22 +10,24 @@ import {
   PURGE,
   REGISTER,
 } from 'redux-persist';
-import storage from 'redux-persist/lib/storage';
+// import storage from 'redux-persist/lib/storage';
 import { phonebookReducer } from './reducers';
 
-const persistConfig = {
-  key: 'root',
-  storage,
-};
+// const persistConfig = {
+//   key: 'root',
+//   storage,
+// };
 
-const persistedReducer = persistReducer(persistConfig, phonebookReducer);
+// const persistedReducer = persistReducer(phonebookReducer);
+
 const middleware = [
   ...getDefaultMiddleware({
     serializableCheck: {
       ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
     },
   }),
+  logger,
 ];
 
-export const store = configureStore({ reducer: persistedReducer, middleware });
-persistStore(store);
+export const store = configureStore({ reducer: phonebookReducer, middleware });
+// persistStore(store);
