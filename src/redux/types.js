@@ -1,3 +1,6 @@
+export const GET_FORM_VALUE_FETCH = 'phonebook/GET_FORM_VALUE_FETCH';
+export const GET_FORM_VALUE_SUCCESS = 'phonebook/GET_FORM_VALUE_SUCCESS';
+export const GET_FORM_VALUE_ERROR = 'phonebook/GET_FORM_VALUE_ERROR';
 export const GET_FORM_VALUE = 'phonebook/GET_FORM_VALUE';
 export const DELETE_CONTACT = 'phonebook/DELETE_CONTACT';
 export const GET_FILTER_VALUE = 'phonebook/GET_FILTER_VALUE';

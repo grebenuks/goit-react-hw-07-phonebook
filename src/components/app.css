@@ -59,3 +59,9 @@
   transform: scale(0);
   transition: transform 250ms ease-in-out;
 }
+.loader {
+  position: absolute;
+  right: 70%;
+  opacity: 0.5;
+  color: cadetblue;
+}

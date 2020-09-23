@@ -1,4 +1,7 @@
 import {
+  GET_FORM_VALUE_FETCH,
+  GET_FORM_VALUE_SUCCESS,
+  // GET_FORM_VALUE_ERROR,
   GET_FORM_VALUE,
   DELETE_CONTACT,
   GET_FILTER_VALUE,
@@ -13,6 +16,7 @@ const initialState = {
     items: [],
     filter: '',
   },
+  isLoading: false,
 };
 
 export const phonebookReducer = createReducer(initialState, {
@@ -20,9 +24,28 @@ export const phonebookReducer = createReducer(initialState, {
     ...state,
     contacts: {
       ...state.contacts,
+      items: [...payload],
+    },
+  }),
+  [GET_FORM_VALUE_FETCH]: (state, { payload }) => ({
+    ...state,
+    isLoading: !state.isLoading,
+  }),
+  [GET_FORM_VALUE_SUCCESS]: (state, { payload }) => ({
+    ...state,
+    contacts: {
+      ...state.contacts,
       items: [...state.contacts.items, payload],
     },
   }),
+  // [GET_FORM_VALUE_ERROR]: (state, { payload }) => ({
+  //   ...state,
+  //   contacts: {
+  //     ...state.contacts,
+  //     items: [...state.contacts.items, payload],
+  //   },
+  // }),
+
   [DELETE_CONTACT]: (state, { payload }) => ({
     ...state,
     contacts: {

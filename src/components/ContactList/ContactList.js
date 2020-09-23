@@ -1,15 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
+import { deleteContactAsync } from '../../redux/operations';
 import { deleteContact, removeFilteredArr } from '../../redux/actions';
 
 import './contactList.css';
 
-import { CSSTransition, TransitionGroup } from 'react-transition-group';
-
-export function ContactList({ value, deleteContact, removeFilteredArr }) {
+export function ContactList({
+  value,
+  deleteContact,
+  removeFilteredArr,
+  deleteContactAsync,
+}) {
   const handleButtonClick = id => {
     deleteContact(id);
+    deleteContactAsync(id);
     removeFilteredArr();
   };
   return (
@@ -55,6 +61,8 @@ const mapStateToProps = state => ({
     : state.contacts.items,
 });
 
-const mapDispatchToProps = { deleteContact, removeFilteredArr };
-
-export default connect(mapStateToProps, mapDispatchToProps)(ContactList);
+export default connect(mapStateToProps, {
+  deleteContact,
+  removeFilteredArr,
+  deleteContactAsync,
+})(ContactList);

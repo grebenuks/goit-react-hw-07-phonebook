@@ -1,20 +1,19 @@
 import React, { useState } from 'react';
-import { v4 as uuidv4 } from 'uuid';
 import PropTypes from 'prop-types';
-import styles from './form.module.css';
-import { connect } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { setNotify } from '../../redux/actions';
-import { getFormValue, getContact } from '../../redux/operations';
+import { postFormValueAsync } from '../../redux/operations';
 
-function Form({ getFormValue, items, setNotify, getContact }) {
+import styles from './form.module.css';
+
+function Form() {
   const [state, setState] = useState({ name: '', number: '' });
+
+  const dispatch = useDispatch();
+  const items = useSelector(state => state.contacts.items);
 
   const handleNameChange = ({ target: { name, value } }) => {
     setState(prev => ({ ...prev, [name]: value }));
-  };
-
-  const notifyTrue = () => {
-    setNotify(true);
   };
 
   const hanndleSubmit = e => {
@@ -25,19 +24,15 @@ function Form({ getFormValue, items, setNotify, getContact }) {
     } else {
       const input = e.target.elements;
       let flag = true;
-
       items.map(el => (el.name === input[0].value ? (flag = false) : ''));
-
       flag
-        ? getFormValue(
-            {
+        ? dispatch(
+            postFormValueAsync({
               name: input[0].value,
               number: input[1].value,
-              id: uuidv4(),
-            },
-            // getContact(),
+            }),
           )
-        : notifyTrue();
+        : dispatch(setNotify(true));
     }
     form.reset();
   };
@@ -75,6 +70,4 @@ Form.propTypes = {
   getName: PropTypes.func,
 };
 
-const mapStateToProps = state => ({ items: state.contacts.items });
-const mapDispatchToProps = { getFormValue, setNotify, getContact };
-export default connect(mapStateToProps, mapDispatchToProps)(Form);
+export default Form;

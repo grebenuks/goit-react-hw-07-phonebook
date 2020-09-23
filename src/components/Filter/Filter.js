@@ -1,12 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import styles from './filter.module.css';
 import {
   getFilterValue,
   setFilteredArr,
   removeFilteredArr,
 } from '../../redux/actions';
-import { connect } from 'react-redux';
 
 function Filter({ filter, getFilterValue, setFilteredArr, removeFilteredArr }) {
   const getName = ({ target: { value } }) => {

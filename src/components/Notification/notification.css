@@ -12,22 +12,22 @@
 
 .notify-enter {
   opacity: 0;
-  transform: translateX(10%);
+  transform: translateX(20%);
 }
 
 .notify-enter-active {
   opacity: 1;
-  transform: translateX(-150%);
+  transform: translateX(-20%);
   transition: opacity 250ms ease-in-out, transform 200ms ease-in-out;
 }
 
 .notify-exit {
   opacity: 1;
-  transform: translateX(-150%);
+  transform: translateX(-20%);
 }
 
 .notify-exit-active {
   opacity: 0;
-  transform: translateX(10%);
+  transform: translateX(20%);
   transition: opacity 250ms ease-in-out, transform 200ms ease-in-out;
 }

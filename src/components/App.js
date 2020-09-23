@@ -1,16 +1,26 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import Form from './Form/Form';
 import ContactList from './ContactList/ContactList';
 import Filter from './Filter/Filter';
 import { Notification } from './Notification/Notification';
 import { setNotify } from '../redux/actions';
+import { getFormValueFireBase } from '../redux/operations';
 
 import { CSSTransition } from 'react-transition-group';
 
 import './app.css';
 
-export function App({ items, notify, setNotify }) {
+export function App({
+  items,
+  notify,
+  setNotify,
+  isLoading,
+  getFormValueFireBase,
+}) {
+  useEffect(() => {
+    getFormValueFireBase();
+  }, [getFormValueFireBase]);
   return (
     <>
       <CSSTransition
@@ -22,6 +32,7 @@ export function App({ items, notify, setNotify }) {
       >
         <Notification />
       </CSSTransition>
+      {isLoading && <h2 className="loader">...loading...</h2>}
       <CSSTransition
         in={true}
         appear={true}
@@ -57,6 +68,7 @@ const mapStateToProps = state => ({
   items: state.contacts.items,
   filter: state.contacts.filter,
   notify: state.contacts.setNotify,
+  isLoading: state.isLoading,
 });
-const mapDispatchToProps = { setNotify };
+const mapDispatchToProps = { setNotify, getFormValueFireBase };
 export default connect(mapStateToProps, mapDispatchToProps)(App);
